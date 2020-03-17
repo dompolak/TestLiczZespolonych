@@ -103,6 +103,3 @@ statystyka::~statystyka()
 
 }
 
-nie nie
-nie nie
-nie nie
