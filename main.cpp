@@ -15,14 +15,16 @@ int main()
         return 1;
     }
 
-    inicjalizuj_test(argv[1]);
+    inicjalizuj_test(argv[1]);*/
 
   
-  //  LZespolona z1, z2;
-    /*for(;;)
+   LZespolona z1, z2;
+    for(;;)
     {
         cin >> z1;
         cout << z1 << endl;
+
+
     }
 
 

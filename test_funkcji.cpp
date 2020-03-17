@@ -1,8 +1,9 @@
 #include "Zespolona.hh"
+using namespace std;
 
 std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
 {
-    char znak;
+    char znak, znak1; string tmp;
     Sk1.re = 0; Sk1.im = 0;
     wejscie >> znak;
     if((wejscie.peek() >= '0' && wejscie.peek() <= '9') || wejscie.peek() == '-')
@@ -15,18 +16,18 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
             return wejscie;
         }
         wejscie.putback(znak);
-        wejscie >> Sk1.re >> znak;
-        if((znak == '-' || znak == '+') && wejscie.peek() == 'i')
+        wejscie >> Sk1.re >> znak >> znak1;
+        if((znak == '-' || znak == '+') && znak1 == 'i')
         {
             if(znak == '-')
             {   
                 Sk1.im = -1;
-                wejscie >> znak >> znak;
+                wejscie >> znak;
                 return wejscie;
             }else
             {
                 Sk1.im = 1;
-                wejscie >> znak >> znak;
+                wejscie >> znak;
                 return wejscie;
             }
         }
@@ -37,10 +38,11 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
             wejscie >> znak; 
             return wejscie;
         }
-        if((znak == '-' || znak == '+') && (wejscie.peek() >= '0' && wejscie.peek() <= '9'))
+        if((znak == '-' || znak == '+') && (znak1 >= '0' && znak1 <= '9'))
         {
+            wejscie.putback(znak1);
             wejscie.putback(znak);
-            wejscie >> Sk1.im >> znak >> znak;
+            wejscie >> Sk1.im >> znak >> znak; 
             return wejscie;
         }
     }   
