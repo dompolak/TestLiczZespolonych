@@ -1,7 +1,8 @@
 #include "BazaTestu.hh"
 
-int main(int argc, char **argv)
+int main()
 {   
+
     using std::cout; 
     using std::endl; 
     using std::cin; 
@@ -16,12 +17,14 @@ int main(int argc, char **argv)
 
     inicjalizuj_test(argv[1]);
 
-*/  
-    LZespolona z1, z2;
-    for(;;)
+  
+  //  LZespolona z1, z2;
+    /*for(;;)
     {
         cin >> z1;
         cout << z1 << endl;
     }
+
+
 
 }
