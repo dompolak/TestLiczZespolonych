@@ -2,8 +2,8 @@
 
 void inicjalizuj_test(const std::string typ_testu)
 {
-    const std::string source_latwy = ".\\testy\\latwy.txt";
-    const std::string source_trudny =  ".\\testy\\trudny.txt";
+    const std::string source_latwy = "..\\testy\\latwy.txt";
+    const std::string source_trudny =  "..\\testy\\trudny.txt";
     LZespolona z1;
     statystyka stat;
     std::ifstream file;

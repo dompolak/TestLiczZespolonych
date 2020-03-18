@@ -22,12 +22,14 @@ int main()
     for(;;)
     {
         cin >> z1;
-        cout << z1 << endl;
+        
         if(cin.fail())
         {
-            std::cerr << "nie" << std::endl ;
             std::cin.clear();
-            std::cin.clear();
+            std::cin.ignore(1024,'\n');
+        }else
+        {
+            cout << z1 << endl;
         }
 
 
