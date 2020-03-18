@@ -18,6 +18,7 @@ public:
 };
 void inicjalizuj_test(const std::string typ_testu);
 void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_tesowe, statystyka&);
+void test_arytmetyki(std::istream &, statystyka &);
 
 
 #endif

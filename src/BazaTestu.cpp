@@ -2,8 +2,8 @@
 
 void inicjalizuj_test(const std::string typ_testu)
 {
-    const std::string source_latwy = "..\\testy\\latwy.txt";
-    const std::string source_trudny =  "..\\testy\\trudny.txt";
+    const std::string source_latwy = ".\\testy\\latwy.txt";
+    const std::string source_trudny =  ".\\testy\\trudny.txt";
     LZespolona z1;
     statystyka stat;
     std::ifstream file;
@@ -12,35 +12,27 @@ void inicjalizuj_test(const std::string typ_testu)
     if(!typ_testu.compare("latwy"))
     {
         file.open(source_latwy);
+        std::cerr << "Latwy" << std::endl;
     }else if(!typ_testu.compare("trudny"))
     {
         file.open(source_trudny);
     }else
     {
-        std::cerr << "Inicjalizacja testu nie powiodla sie!" << std::endl;
+        std::cout << "Inicjalizacja testu nie powiodla sie!" << std::endl;
     }
 
     if(file.fail())
     {
-        std::cerr << "Inicjalizacja testu nie powiodla sie!" <<std:: endl;
+        std::cout << "Inicjalizacja testu nie powiodla sie!" <<std:: endl;
     }else
     {
-        std::cout << "Start testu:" << std::endl;
-        while(!file.eof())
-        {
-            file >> pytanie_testowe;
-            if(file.eof()) break;
-            std::cout << "Podaj wynik operacji: " << pytanie_testowe << " = ";
-            std::cin >> z1;
-            std::cout << "Twoja odpowiedz: " << z1 << std::endl;
-            sprawdz(z1, pytanie_testowe, stat);
-        }
+        std::cout << "Start testu arytmetyki zespolonej" << std::endl;
+        test_arytmetyki(file, stat);
+        std::cout << "Koniec testu." << std::endl;
         std::cout << "Ilosc dobrych odpowiedzi: " << stat.getPoprawne() << std::endl;
         std::cout << "Ilosc blednych odpowiedzi: " << stat.getNiepoprawne() << std::endl;
-        std::cout << "Procentowy wynik testu: " << stat.procent() << "%" << std::endl << std::endl;
-        std::cout << "Koniec testu" << std::endl;
+        std::cout << "wynik procentowy poprawnych odpowiedzi:  " << stat.procent() <<"%" <<std::endl;
 
-        file.close();
     }
 
 
@@ -65,7 +57,6 @@ void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &
 void statystyka::licz_pytania()
 {
     this->ilosc_pytan++;
-    std::cerr << "Dodano pytanie: ilsoc: " << this->ilosc_pytan << std::endl;
 }
 
 void statystyka::licz_poprawne()
@@ -88,7 +79,10 @@ int statystyka::getNiepoprawne()
 
 double statystyka::procent()
 {
-    return (this->poprawne/this->ilosc_pytan) * 100;
+    if(ilosc_pytan == 0)
+    {return 0;}
+    else
+    {return (this->poprawne/this->ilosc_pytan) * 100;}
 
 }
 
@@ -103,3 +97,52 @@ statystyka::~statystyka()
 
 }
 
+void test_arytmetyki(std::istream &file, statystyka &stat)
+{
+    while(!file.eof())
+    {
+        Wyra_zespolone wyrazenie;
+        LZespolona z1;
+        if(file.eof())        
+        {   
+            std::cerr << "co jest ? " << std::endl;
+            break;}
+        else
+        {
+            file >> wyrazenie;
+            if(file.fail())
+            {   
+                std::cout << std::endl << "Napotkano bledne wyrazenie. Zostalo ono pominiete." << std::endl << std::endl;
+                file.clear();
+                file.ignore(1024, '\n');
+            }else
+            {
+                std::cout << "Podaj wynik operacji: " << wyrazenie << " = ";
+                std::cin >> z1;
+                if(std::cin.fail())
+                {   
+                    int i = 0;
+                    for(; i < 2; i++)
+                    {
+                        std::cin.clear();
+                        std::cin.ignore(1024, '\n');
+                        std::cin >> z1;
+                        if(!std::cin.fail())
+                        {break;}
+                    }
+                    if(i == 2)
+                    {
+                    std::cin.clear();
+                    std::cin.ignore(1024, '\n');
+                    stat.licz_pytania();
+
+                    }
+                }else
+                {
+                    std::cout << "Twoja odpowiedz: " << z1 << std::endl;
+                    sprawdz(z1, wyrazenie, stat);
+                }
+            }
+        }
+    }
+}

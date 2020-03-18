@@ -3,7 +3,7 @@ OBJ=./obj
 FLAGS= -Wall -pedantic -std=c++14 -iquote inc
 
 ${TRGDIR}/test: ${OBJ}/main.o ${OBJ}/Zespolona.o ${OBJ}/WyrazenieZespolone.o ${OBJ}/BazaTestu.o
-	g++ -o ${TRGDIR}/test.exe ${OBJ}/main.o ${OBJ}/Zespolona.o ${OBJ}/WyrazenieZespolone.o ${OBJ}/BazaTestu.o
+	g++ -o ${TRGDIR}/test ${OBJ}/main.o ${OBJ}/Zespolona.o ${OBJ}/WyrazenieZespolone.o ${OBJ}/BazaTestu.o
 
 ${OBJ}/main.o: src/main.cpp inc/WyrazenieZespolone.hh inc/Zespolona.hh
 		g++ -c ${FLAGS} -o ${OBJ}/main.o src/main.cpp

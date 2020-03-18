@@ -38,10 +38,10 @@ LZespolona::~LZespolona()
      } 
      return wyjscie << '(' << Sk1.re << std::showpos << Sk1.im << std::noshowpos << "i)"; 
  }
- 
+
 std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
 {
-    char znak, znak1;
+    char znak, znak1; std::string test;
     Sk1.re = 0; Sk1.im = 0;
     wejscie >> znak;
     if((znak == '(') && ((wejscie.peek() >= '0' && wejscie.peek() <= '9') || (wejscie.peek() == '-')))
@@ -80,11 +80,10 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
                 return wejscie;
 
         }
-        if(znak == 'i' && wejscie.peek() == ')')
+        if(znak == 'i' && znak1 == ')')
         {
             Sk1.im = Sk1.re; 
             Sk1.re = 0;
-            wejscie >> znak; 
             return wejscie;
         }
         wejscie.putback(znak1);
@@ -131,16 +130,22 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
  LZespolona operator / (const LZespolona &Sk1,LZespolona &Sk2)
  {
     LZespolona wynik;
-    wynik = (Sk1 * Sk2.sprzezenie(Sk2)) / (Sk2.modul() * Sk2.modul());
+    wynik = (Sk1 * Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
     return wynik;
  }
 
  LZespolona operator / (const LZespolona &Sk1, const double liczba )
  {
      LZespolona wynik;
+     if(liczba == 0)
+     {
+        //  throw 
+     }else
+     {
      wynik.re = Sk1.re / liczba;
      wynik.im = Sk1.im / liczba;
-     return wynik;
+     }
+    return wynik;
  }
 
  bool operator == (const LZespolona &Sk1, const LZespolona &Sk2)
@@ -158,11 +163,11 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      return sqrt(this->re * this->re + this->im * this->im);
  }
 
- LZespolona LZespolona::sprzezenie(LZespolona &Sk1)
+ LZespolona LZespolona::sprzezenie()
  {
      LZespolona wynik;
-     wynik.re = Sk1.re;
-     wynik.im = Sk1.im * -1;
+     wynik.re = this->re;
+     wynik.im = this->im * -1;
      return wynik;
  }
 

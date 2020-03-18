@@ -50,15 +50,21 @@ std::ostream &operator << (std::ostream &wyjscie, const Wyra_zespolone &wyrazeni
 LZespolona Wyra_zespolone::oblicz_wyrazenie(Wyra_zespolone &wyrazenie)
 {
     LZespolona wynik;
+    switch(wyrazenie.oper)
+    {
+        case 0:
+            wynik = wyrazenie.Arg1 + wyrazenie.Arg2;
+        break;
+        case 1:
+            wynik = wyrazenie.Arg1 - wyrazenie.Arg2;
+        break;
+        case 2:
+            wynik = wyrazenie.Arg1 * wyrazenie.Arg2;
+        break;
+        case 3:
+            wynik = wyrazenie.Arg1 / wyrazenie.Arg2;
+        break;
 
-    if(wyrazenie.oper == '+')
-        {wynik = wyrazenie.Arg1 + wyrazenie.Arg2;}
-    if(wyrazenie.oper == '-')
-       {wynik = wyrazenie.Arg1 - wyrazenie.Arg2;}
-    if(wyrazenie.oper == '*')
-        {wynik = wyrazenie.Arg1 * wyrazenie.Arg2;}
-    if(wyrazenie.oper == '/')
-        {wynik = wyrazenie.Arg1 / wyrazenie.Arg2;}
-    
+    }
     return wynik;
 }
