@@ -19,11 +19,13 @@ void inicjalizuj_test(const std::string typ_testu)
     }else
     {
         std::cout << "Inicjalizacja testu nie powiodla sie!" << std::endl;
+        exit(1);
     }
 
     if(file.fail())
     {
         std::cout << "Inicjalizacja testu nie powiodla sie!" <<std:: endl;
+        exit(1);
     }else
     {
         std::cout << "Start testu arytmetyki zespolonej" << std::endl;
@@ -104,9 +106,7 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
         Wyra_zespolone wyrazenie;
         LZespolona z1;
         if(file.eof())        
-        {   
-            std::cerr << "co jest ? " << std::endl;
-            break;}
+        {break;}
         else
         {
             file >> wyrazenie;
