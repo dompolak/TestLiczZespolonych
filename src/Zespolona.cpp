@@ -138,9 +138,8 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
  {
      LZespolona wynik;
      if(liczba == 0)
-     {
-        //  throw 
-     }else
+     {}
+     else 
      {
      wynik.re = Sk1.re / liczba;
      wynik.im = Sk1.im / liczba;
