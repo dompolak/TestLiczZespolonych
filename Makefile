@@ -2,6 +2,10 @@ TRGDIR=./
 OBJ=./obj
 FLAGS= -Wall -pedantic -std=c++14 -iquote inc
 
+__start__: ${TRGDIR}/test 
+			${TRGDIR}/test latwy
+
+
 ${TRGDIR}/test: ${OBJ}/main.o ${OBJ}/Zespolona.o ${OBJ}/WyrazenieZespolone.o ${OBJ}/BazaTestu.o
 	g++ -o ${TRGDIR}/test ${OBJ}/main.o ${OBJ}/Zespolona.o ${OBJ}/WyrazenieZespolone.o ${OBJ}/BazaTestu.o
 

@@ -134,7 +134,7 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
     return wynik;
  }
 
- LZespolona operator / (const LZespolona &Sk1, const double liczba )
+ LZespolona operator / (const LZespolona &Sk1,const double liczba )
  {
      LZespolona wynik;
      if(liczba == 0)
@@ -149,10 +149,7 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
 
  bool operator == (const LZespolona &Sk1, const LZespolona &Sk2)
  {
-     if((Sk1.re == Sk2.re) && (Sk1.im == Sk2.im))
-     {
-        return true;
-     }
+    //if()
         
         return false;
  }

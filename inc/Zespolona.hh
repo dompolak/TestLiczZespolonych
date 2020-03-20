@@ -3,11 +3,10 @@
 
 #include<iostream>
 #include<string>
-#include<cstring>
-#include<cassert>
 #include<math.h>
-#include<string>
+#include<cstring>
 #include<fstream>
+#include <iomanip>
 
 class LZespolona
 {
@@ -21,7 +20,7 @@ public:
     friend LZespolona operator + (const LZespolona &Sk1, const LZespolona &Sk2);
     friend LZespolona operator - (const LZespolona &Sk1, const LZespolona &Sk2);
     friend LZespolona operator * (const LZespolona &Sk1, const LZespolona &Sk2);
-    friend LZespolona operator / (const LZespolona &Sk1, double liczba );
+    friend LZespolona operator / (const  LZespolona &Sk1,const double liczba );
     friend LZespolona operator / (const LZespolona &Sk1, LZespolona &Sk2);
     friend bool operator == (const LZespolona &Sk1, const LZespolona &Sk2);
     double modul();

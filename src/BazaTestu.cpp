@@ -12,7 +12,6 @@ void inicjalizuj_test(const std::string typ_testu)
     if(!typ_testu.compare("latwy"))
     {
         file.open(source_latwy);
-        std::cerr << "Latwy" << std::endl;
     }else if(!typ_testu.compare("trudny"))
     {
         file.open(source_trudny);
@@ -28,13 +27,14 @@ void inicjalizuj_test(const std::string typ_testu)
         exit(1);
     }else
     {
-        std::cout << "Start testu arytmetyki zespolonej" << std::endl;
+        std::cout << "Start testu arytmetyki zespolonej! " << std::endl;
+        std::cout << "Poziom: " << typ_testu << std::endl;
         test_arytmetyki(file, stat);
         std::cout << "Koniec testu." << std::endl;
         std::cout << "Ilosc dobrych odpowiedzi: " << stat.getPoprawne() << std::endl;
         std::cout << "Ilosc blednych odpowiedzi: " << stat.getNiepoprawne() << std::endl;
-        std::cout << "wynik procentowy poprawnych odpowiedzi:  " << stat.procent() <<"%" <<std::endl;
-
+        std::cout << "wynik procentowy poprawnych odpowiedzi:  " <<  stat.procent() <<"%" <<std::endl;
+        file.close();
     }
 
 
@@ -48,10 +48,10 @@ void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &
     if(wynik == z1)
     {
         stat.licz_poprawne();
-        std::cout << "Odpowiedz poprawna" << std::endl;
+        std::cout << "Odpowiedz poprawna" << std::endl << std::endl;
     }else
     {
-        std::cout << "Blad. Poprawnym wynikiem jest: " << wynik << std::endl;
+        std::cout << "Blad. Poprawnym wynikiem jest: " << wynik << std::endl << std::endl;
     }
 }
 
@@ -106,13 +106,14 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
         Wyra_zespolone wyrazenie;
         LZespolona z1;
         if(file.eof())        
-        {break;}
-        else
         {
+            std::cerr << "????" << std::endl;
+            break;
+        }
             file >> wyrazenie;
             if(file.fail())
             {   
-                std::cout << std::endl << "Napotkano bledne wyrazenie. Zostalo ono pominiete." << std::endl << std::endl;
+                std::cout << "Napotkano bledne wyrazenie. Zostalo ono pominiete." << std::endl << std::endl;
                 file.clear();
                 file.ignore(1024, '\n');
             }else
@@ -135,7 +136,6 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
                     std::cin.clear();
                     std::cin.ignore(1024, '\n');
                     stat.licz_pytania();
-
                     }
                 }else
                 {
@@ -143,6 +143,6 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
                     sprawdz(z1, wyrazenie, stat);
                 }
             }
-        }
+        
     }
 }
