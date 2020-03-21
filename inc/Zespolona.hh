@@ -6,7 +6,8 @@
 #include<math.h>
 #include<cstring>
 #include<fstream>
-#include <iomanip>
+#include<cfloat>
+
 
 class LZespolona
 {

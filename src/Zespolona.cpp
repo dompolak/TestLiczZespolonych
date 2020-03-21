@@ -149,8 +149,11 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
 
  bool operator == (const LZespolona &Sk1, const LZespolona &Sk2)
  {
-    //if()
-        
+    if(fabs(Sk2.re - Sk1.re) <= FLT_EPSILON)       /* FLT_EPSILON 1E-5*/
+       {
+            if(fabs(Sk2.im - Sk1.im) <= FLT_EPSILON)
+            {return true;}
+       }
         return false;
  }
 
