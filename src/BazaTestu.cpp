@@ -45,6 +45,9 @@ void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &
     LZespolona wynik;
     stat.licz_pytania();
     wynik = pytanie_testowe.oblicz_wyrazenie(pytanie_testowe);
+
+    std::cout << "Twoja odpowiedz: " << z1 << std::endl;
+
     if(wynik == z1)
     {
         stat.licz_poprawne();
@@ -129,17 +132,20 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
                         std::cin.ignore(1024, '\n');
                         std::cin >> z1;
                         if(!std::cin.fail())
-                        {break;}
+                        {
+                            sprawdz(z1, wyrazenie, stat);
+                            break;
+                        }
                     }
                     if(i == 2)
                     {
                     std::cin.clear();
                     std::cin.ignore(1024, '\n');
                     stat.licz_pytania();
+                    std::cout << std::endl;
                     }
                 }else
                 {
-                    std::cout << "Twoja odpowiedz: " << z1 << std::endl;
                     sprawdz(z1, wyrazenie, stat);
                 }
             }
