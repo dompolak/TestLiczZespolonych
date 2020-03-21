@@ -6,7 +6,7 @@ int main(int argc, char **argv)
     using std::cout; 
     using std::endl; 
     using std::cin; 
- if(argc < 2)
+    if(argc < 2)
     {
         cout << endl;
         cout << "Brak opcji okreslajacej rodzaj testu." << endl;

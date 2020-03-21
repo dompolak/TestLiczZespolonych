@@ -125,7 +125,8 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
                 std::cin >> z1;
                 if(std::cin.fail())
                 {   
-                    for(int i = 0; i < 2; i++)
+                    int i(0);
+                    for(; i < 2; i++)
                     {
                         std::cin.clear();
                         std::cin.ignore(1024, '\n');
@@ -136,10 +137,13 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
                             break;
                         }
                     }
+                    if(i == 2)
+                    {
                     std::cin.clear();
                     std::cin.ignore(1024, '\n');
                     stat.licz_pytania();
                     std::cout << std::endl;
+                    }
                 }else
                 {
                     sprawdz(z1, wyrazenie, stat);
