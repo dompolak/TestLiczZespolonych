@@ -104,16 +104,16 @@ statystyka::~statystyka()
 
 void test_arytmetyki(std::istream &file, statystyka &stat)
 {
-    while(!file.eof())
+    while(true)
     {
         Wyra_zespolone wyrazenie;
         LZespolona z1;
+        file >> wyrazenie;
         if(file.eof())        
         {
             std::cerr << "????" << std::endl;
             break;
         }
-            file >> wyrazenie;
             if(file.fail())
             {   
                 std::cout << "Napotkano bledne wyrazenie. Zostalo ono pominiete." << std::endl << std::endl;
