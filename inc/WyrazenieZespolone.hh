@@ -20,5 +20,5 @@ public:
 
 };
 std::istream &operator >> (std::istream &StrWe, Operator &WczytSym );
-std::ostream &operator << (std::ostream &wyjscie,const Operator &Op);
+std::ostream &operator << (std::ostream &wyjscie, const Operator &Op);
 #endif

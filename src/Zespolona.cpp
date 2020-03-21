@@ -127,14 +127,14 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      return wynik;
  }
 
- LZespolona operator / (const LZespolona &Sk1,LZespolona &Sk2)
+ LZespolona operator / (const LZespolona &Sk1, LZespolona Sk2)
  {
     LZespolona wynik;
     wynik = (Sk1 * Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
     return wynik;
  }
 
- LZespolona operator / (const LZespolona &Sk1,const double liczba )
+ LZespolona operator / (const LZespolona &Sk1, const double liczba )
  {
      LZespolona wynik;
      if(liczba == 0)

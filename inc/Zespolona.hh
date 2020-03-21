@@ -22,7 +22,7 @@ public:
     friend LZespolona operator - (const LZespolona &Sk1, const LZespolona &Sk2);
     friend LZespolona operator * (const LZespolona &Sk1, const LZespolona &Sk2);
     friend LZespolona operator / (const  LZespolona &Sk1,const double liczba );
-    friend LZespolona operator / (const LZespolona &Sk1, LZespolona &Sk2);
+    friend LZespolona operator / (const LZespolona &Sk1, LZespolona Sk2);
     friend bool operator == (const LZespolona &Sk1, const LZespolona &Sk2);
     double modul();
     LZespolona sprzezenie();
