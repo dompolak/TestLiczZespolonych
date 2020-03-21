@@ -110,44 +110,42 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
         LZespolona z1;
         file >> wyrazenie;
         if(file.eof())        
+            {break;}
+        if(file.fail())
+        {   
+            std::cout << "Napotkano bledne wyrazenie. Zostalo ono pominiete." << std::endl << std::endl;
+            file.clear();
+            file.ignore(1024, '\n');
+        }else
         {
-            std::cerr << "????" << std::endl;
-            break;
-        }
-            if(file.fail())
+            std::cout << "Podaj wynik operacji: " << wyrazenie << " = ";
+            std::cin >> z1;
+            if(std::cin.fail())
             {   
-                std::cout << "Napotkano bledne wyrazenie. Zostalo ono pominiete." << std::endl << std::endl;
-                file.clear();
-                file.ignore(1024, '\n');
-            }else
-            {
-                std::cout << "Podaj wynik operacji: " << wyrazenie << " = ";
-                std::cin >> z1;
-                if(std::cin.fail())
-                {   
-                    int i(0);
-                    for(; i < 2; i++)
+                int i(0);
+                for(; i < 2; i++)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(1024, '\n');
+                    std::cin >> z1;
+                    if(!std::cin.fail())
                     {
-                        std::cin.clear();
-                        std::cin.ignore(1024, '\n');
-                        std::cin >> z1;
-                        if(!std::cin.fail())
-                        {
-                            sprawdz(z1, wyrazenie, stat);
-                            break;
-                        }
+                        sprawdz(z1, wyrazenie, stat);
+                        break;
                     }
-                    if(i == 2)
-                    {
+                }
+
+                if(i == 2)
+                {
                     std::cin.clear();
                     std::cin.ignore(1024, '\n');
                     stat.licz_pytania();
                     std::cout << std::endl;
-                    }
-                }else
-                {
-                    sprawdz(z1, wyrazenie, stat);
                 }
-            }   
+            }else
+            {
+                sprawdz(z1, wyrazenie, stat);
+            }
+        }   
     }
 }
