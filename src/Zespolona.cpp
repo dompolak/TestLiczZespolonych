@@ -146,6 +146,14 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
         return false;
  }
 
+bool operator != (const LZespolona &Sk1, const LZespolona &Sk2)
+{
+    if(!(Sk1 == Sk2))
+        {return true;}
+
+    return false;
+}
+
  double LZespolona::modul()
  {
      return sqrt(this->re * this->re + this->im * this->im);
