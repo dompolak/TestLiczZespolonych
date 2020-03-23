@@ -58,50 +58,6 @@ void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &
     }
 }
 
-
-void statystyka::licz_pytania()
-{
-    this->ilosc_pytan++;
-}
-
-void statystyka::licz_poprawne()
-{
-    this->poprawne++;
-}
-int statystyka::getPoprawne()
-{
-    return this->poprawne;
-}
-int statystyka::getLpytan()
-{
-    return this->ilosc_pytan;
-}
-
-int statystyka::getNiepoprawne()
-{
-    return this->ilosc_pytan - this->poprawne;
-}
-
-double statystyka::procent()
-{
-    if(ilosc_pytan == 0)
-    {return 0;}
-    else
-    {return (this->poprawne/this->ilosc_pytan) * 100;}
-
-}
-
-statystyka::statystyka()
-{
-    this->ilosc_pytan = 0;
-    this->poprawne = 0;
-}
-
-statystyka::~statystyka()
-{
-
-}
-
 void test_arytmetyki(std::istream &file, statystyka &stat)
 {
     while(true)
