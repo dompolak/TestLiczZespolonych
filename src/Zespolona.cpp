@@ -92,55 +92,55 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
         return wejscie;
 }
 
- LZespolona operator + (const LZespolona &Sk1,const LZespolona &Sk2)
+ LZespolona LZespolona::operator + (const LZespolona &Sk1) const
  {
      LZespolona wynik;
-     wynik.re = Sk1.re + Sk2.re;
-     wynik.im = Sk1.im + Sk2.im;
+     wynik.re = this->re + Sk1.re;
+     wynik.im = this->im + Sk1.im;
      return wynik;
  }
 
- LZespolona operator - (const LZespolona &Sk1,const LZespolona &Sk2)
+ LZespolona LZespolona::operator - (const LZespolona &Sk1) const
  {
      LZespolona wynik;
-     wynik.re = Sk1.re - Sk2.re;
-     wynik.im = Sk1.im - Sk2.im;
+     wynik.re = this->re - Sk1.re;
+     wynik.im = this->im - Sk1.im;
      return wynik;
  }
 
-  LZespolona operator * (const LZespolona &Sk1,const LZespolona &Sk2)
+  LZespolona LZespolona::operator * (const LZespolona &Sk1) const
  {
      LZespolona wynik;
-     wynik.re = Sk1.re * Sk2.re - Sk1.im * Sk2.im;
-     wynik.im = Sk1.re * Sk2.im + Sk1.im * Sk2.re;
+     wynik.re = this->re * Sk1.re - this->im * Sk1.im;
+     wynik.im = this->re * Sk1.im + this->im * Sk1.re;
      return wynik;
  }
 
- LZespolona operator / (const LZespolona &Sk1, LZespolona Sk2)
+ LZespolona operator / (const LZespolona &Sk1,LZespolona Sk2)
  {
     LZespolona wynik;
-    wynik = (Sk1 * Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
+    wynik = (Sk1*  Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
     return wynik;
  }
 
- LZespolona operator / (const LZespolona &Sk1, const double liczba )
+ LZespolona LZespolona::operator / (const double &liczba ) const
  {
      LZespolona wynik;
      if(liczba == 0)
      {}
      else 
      {
-     wynik.re = Sk1.re / liczba;
-     wynik.im = Sk1.im / liczba;
+     wynik.re = this->re / liczba;
+     wynik.im = this->im/ liczba;
      }
     return wynik;
  }
 
- bool operator == (const LZespolona &Sk1, const LZespolona &Sk2)
+ bool LZespolona::operator == (const LZespolona &Sk1) const
  {
-    if(fabs(Sk2.re - Sk1.re) <= FLT_EPSILON)       /* FLT_EPSILON 1E-5*/
+    if(fabs(this->re - Sk1.re) <= FLT_EPSILON)       /* FLT_EPSILON 1E-5*/
        {
-            if(fabs(Sk2.im - Sk1.im) <= FLT_EPSILON)
+            if(fabs(this->im - Sk1.im) <= FLT_EPSILON)
             {return true;}
        }
         return false;

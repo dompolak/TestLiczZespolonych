@@ -18,12 +18,12 @@ public:
     ~LZespolona();
     friend std::ostream &operator << (std::ostream &wyjscie, const LZespolona &Sk1);
     friend std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1);
-    friend LZespolona operator + (const LZespolona &Sk1, const LZespolona &Sk2);
-    friend LZespolona operator - (const LZespolona &Sk1, const LZespolona &Sk2);
-    friend LZespolona operator * (const LZespolona &Sk1, const LZespolona &Sk2);
-    friend LZespolona operator / (const  LZespolona &Sk1,const double liczba );
+    LZespolona operator + (const LZespolona &Sk1) const;
+    LZespolona operator - (const LZespolona &Sk1) const;
+    LZespolona operator * (const LZespolona &Sk1) const;
     friend LZespolona operator / (const LZespolona &Sk1, LZespolona Sk2);
-    friend bool operator == (const LZespolona &Sk1, const LZespolona &Sk2);
+    LZespolona operator / (const double &liczba) const;
+    bool operator == (const LZespolona &Sk1) const;
     friend bool operator != (const LZespolona &Sk1, const LZespolona &Sk2);
     double modul();
     LZespolona sprzezenie();
