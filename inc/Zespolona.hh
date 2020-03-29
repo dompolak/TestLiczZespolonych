@@ -15,18 +15,24 @@ class LZespolona
     double im;
 public:
     LZespolona();
+    explicit LZespolona(double, double);
     ~LZespolona();
-    friend std::ostream &operator << (std::ostream &wyjscie, const LZespolona &Sk1);
-    friend std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1);
+    void set_re(double);
+    void set_im(double);
+    double get_re() const;
+    double get_im() const;
     LZespolona operator + (const LZespolona &Sk1) const;
     LZespolona operator - (const LZespolona &Sk1) const;
     LZespolona operator * (const LZespolona &Sk1) const;
-    friend LZespolona operator / (const LZespolona &Sk1, LZespolona Sk2);
+    LZespolona operator / (LZespolona) const;
     LZespolona operator / (const double &liczba) const;
     bool operator == (const LZespolona &Sk1) const;
-    friend bool operator != (const LZespolona &Sk1, const LZespolona &Sk2);
+    bool operator != (const LZespolona &Sk1) const;
     double modul();
     LZespolona sprzezenie();
 };
+
+std::ostream &operator << (std::ostream &wyjscie, const  LZespolona &Sk1);
+std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1);
 
 #endif

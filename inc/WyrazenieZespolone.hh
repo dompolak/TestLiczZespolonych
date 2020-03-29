@@ -13,12 +13,18 @@ class Wyra_zespolone
 public:
     Wyra_zespolone(){};
     ~Wyra_zespolone(){};
-    friend std::istream &operator >>(std::istream &wejscie, Wyra_zespolone &wyrazenie);
-    friend std::ostream &operator << (std::ostream &wyjscie, const Wyra_zespolone &wyrazenie);
+    LZespolona get_Arg1() const;
+    LZespolona get_Arg2() const;
+    Operator get_oper() const;
+    void set_Arg1(LZespolona);
+    void set_Arg2(LZespolona);
+    void set_oper(Operator);
     LZespolona oblicz_wyrazenie(Wyra_zespolone &);
-    
-
 };
+
 std::istream &operator >> (std::istream &StrWe, Operator &WczytSym );
 std::ostream &operator << (std::ostream &wyjscie, const Operator &Op);
+std::istream &operator >>(std::istream &wejscie, Wyra_zespolone &wyrazenie);
+std::ostream &operator << (std::ostream &wyjscie, const Wyra_zespolone &wyrazenie);
+
 #endif

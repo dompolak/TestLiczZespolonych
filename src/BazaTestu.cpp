@@ -44,8 +44,16 @@ void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &
 {
     LZespolona wynik;
     stat.licz_pytania();
-    wynik = pytanie_testowe.oblicz_wyrazenie(pytanie_testowe);
-
+    try
+    {
+        wynik = pytanie_testowe.oblicz_wyrazenie(pytanie_testowe);
+    }
+    catch(std::string w)
+    {
+        std::cout << w << std::endl << std::endl;
+        return;
+    }
+    
     std::cout << "Twoja odpowiedz: " << z1 << std::endl;
 
     if(wynik == z1)

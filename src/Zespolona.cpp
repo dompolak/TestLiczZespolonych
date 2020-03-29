@@ -10,86 +10,116 @@ LZespolona::~LZespolona()
 {
 
 }
+LZespolona::LZespolona(double re, double im)
+{
+    this->re = re;
+    this->im = im;
+}
 
- std::ostream &operator << (std::ostream &wyjscie, const  LZespolona &Sk1)
+void LZespolona::set_re (double re)
+{
+    this->re = re;
+}
+
+void LZespolona::set_im (double im)
+{
+    this->im = im;
+}
+
+double LZespolona::get_re() const
+{
+    return this->re;
+}
+double LZespolona::get_im() const
+{
+    return this->im;
+}
+
+std::ostream &operator << (std::ostream &wyjscie, const  LZespolona &Sk1)
  {  
-     if(Sk1.re == 0 && (Sk1.im == 1 || Sk1.im == -1))
+     if(Sk1.get_re() == 0 && (Sk1.get_im() == 1 || Sk1.get_im() == -1))
      {
-         if(Sk1.im == -1)
+         if(Sk1.get_im() == -1)
          {return wyjscie << "(-i)";}
-         if(Sk1.im == 1)
+         if(Sk1.get_im() == 1)
          {return wyjscie << "(i)";}
      }
-     if(Sk1.im == 1)
+     if(Sk1.get_im() == 1)
      {  
-         return wyjscie << '(' << Sk1.re <<"+i)"; 
+         return wyjscie << '(' << Sk1.get_re() <<"+i)"; 
      }
-     if(Sk1.im == 0)
+     if(Sk1.get_im() == 0)
      {
-         return wyjscie << '(' << Sk1.re << ')';
+         return wyjscie << '(' << Sk1.get_re() << ')';
      }
-     if(Sk1.im == -1)
+     if(Sk1.get_im() == -1)
      {
-        return wyjscie << '(' << Sk1.re <<"-i)";
+        return wyjscie << '(' << Sk1.get_re() <<"-i)";
      } 
-     if(Sk1.re == 0)
+     if(Sk1.get_re() == 0)
      {
-         return wyjscie << '(' << Sk1.im << "i)";
+         return wyjscie << '(' << Sk1.get_im() << "i)";
      } 
-     return wyjscie << '(' << Sk1.re << std::showpos << Sk1.im << std::noshowpos << "i)"; 
+     return wyjscie << '(' << Sk1.get_re() << std::showpos << Sk1.get_im() << std::noshowpos << "i)"; 
+    
  }
 
 std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
 {
     char znak, znak1;
-    Sk1.re = 0; Sk1.im = 0;
+    Sk1.set_re(0);   Sk1.set_im(0);
+    double im, re;
     wejscie >> znak;
     if((znak == '(') && ((wejscie.peek() >= '0' && wejscie.peek() <= '9') || (wejscie.peek() == '-')))
     {   
         wejscie >> znak;
         if(znak == '-' && wejscie.peek() == 'i')
         {
-            Sk1.im = -1;
+            Sk1.set_im(-1);
             wejscie >> znak >> znak;
             if(znak != ')')
                 {wejscie.setstate(std::ios::failbit);}
         }
         wejscie.putback(znak);
-        wejscie >> Sk1.re >> znak; 
+        wejscie >> re >> znak; 
         if(znak == ')')
-            {return wejscie;}
+            {Sk1.set_re(re);
+            return wejscie;}
         else
-            {wejscie >> znak1;}
+            {Sk1.set_re(re);
+            wejscie >> znak1;}
         if((znak == '-' || znak == '+') && znak1 == 'i')
         {
             if(znak == '-')
-                {Sk1.im = -1;}
+                {Sk1.set_im(-1);}
             if(znak == '+')
-                {Sk1.im = 1;}
+                {Sk1.set_im(1);}
             wejscie >> znak;
             if(znak != ')')
                 {wejscie.setstate(std::ios::failbit);}
         }
         if(znak == 'i' && znak1 == ')')
         {
-            Sk1.im = Sk1.re; 
-            Sk1.re = 0;
+            Sk1.set_im(re); 
+            Sk1.set_re(0);
             return wejscie;
         }
         wejscie.putback(znak1);
         wejscie.putback(znak);
-        wejscie >> Sk1.im >> znak >> znak1;
+        wejscie >> im >> znak >> znak1;
         if(znak == 'i' && znak1 == ')')
-            {return wejscie;}
+            {Sk1.set_im(im);
+            return wejscie;}
     }if(wejscie.peek() == 'i' && znak == '(')
     {
-        Sk1.im = 1;
+        Sk1.set_im(1);
         wejscie >> znak >> znak;
         if(znak != ')')
             {wejscie.setstate(std::ios::failbit);}
     }
-        wejscie.setstate(std::ios::failbit);
-        return wejscie;
+
+    wejscie.setstate(std::ios::failbit);
+    return wejscie;
 }
 
  LZespolona LZespolona::operator + (const LZespolona &Sk1) const
@@ -116,10 +146,10 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      return wynik;
  }
 
- LZespolona operator / (const LZespolona &Sk1,LZespolona Sk2)
+ LZespolona LZespolona::operator / (LZespolona Sk2) const
  {
     LZespolona wynik;
-    wynik = (Sk1*  Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
+    wynik = (*this * Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
     return wynik;
  }
 
@@ -127,7 +157,10 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
  {
      LZespolona wynik;
      if(liczba == 0)
-     {}
+     {   
+         std::string wyjatek = "Dzielenie przez zero!";
+         throw wyjatek;
+     }
      else 
      {
      wynik.re = this->re / liczba;
@@ -146,9 +179,9 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
         return false;
  }
 
-bool operator != (const LZespolona &Sk1, const LZespolona &Sk2)
+bool LZespolona::operator != (const LZespolona &Sk1) const
 {
-    if(!(Sk1 == Sk2))
+    if(!(*this == Sk1))
         {return true;}
 
     return false;
@@ -166,4 +199,3 @@ bool operator != (const LZespolona &Sk1, const LZespolona &Sk2)
      wynik.im = this->im * -1;
      return wynik;
  }
-
