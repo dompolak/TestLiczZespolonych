@@ -8,6 +8,9 @@
 #include<fstream>
 #include<cfloat>
 
+/*
+*   Plik zawieta klase liczba zespolona wraz z metodami tej klasy
+*/
 
 class LZespolona
 {
@@ -31,6 +34,11 @@ public:
     double modul();
     LZespolona sprzezenie();
 };
+
+/*
+*   Przeciazenia operatow wczytywania liczby zespolonej
+*
+*/
 
 std::ostream &operator << (std::ostream &wyjscie, const  LZespolona &Sk1);
 std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1);

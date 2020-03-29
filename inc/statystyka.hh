@@ -2,6 +2,10 @@
 #define _STATYSTYKA_HH
 
 #include<iostream>
+/*
+*   klasa, definiujaca statystyke
+*
+*/
 
 class statystyka
 {
