@@ -1,5 +1,15 @@
 #include "Bazatestu.hh"
 
+/*
+*   Funkcja inicjalizujaca test
+*Przyjmuje
+*   Typ testu podany przez uzytkownika 
+*   
+*Funkcja
+*   -sprawdza czy typ testu zostal podany poprawnie
+*   -czy plik otworzyl sie poprawnie
+*   -nastpenie inicjuje test liczb zespolonych
+*/
 void inicjalizuj_test(const std::string typ_testu)
 {
     const std::string source_latwy = ".\\testy\\latwy.txt";
@@ -39,6 +49,15 @@ void inicjalizuj_test(const std::string typ_testu)
 
 
 }
+/*
+*   Funkcja sprawdzajaca czy podane dane przez uzytkownika sa zgodne z wynikiem dzialania
+*Przyjmuje:
+*   z1 - liczba zespolona podana przez uzytkownika
+*   pytanie_testowe - pytanie pobrane z bazy testow
+*   stat - statystyka 
+* 
+*Funckja wyswietla czy wynik byl poprawny czy bledny 
+*/
 
 void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &stat)
 {
@@ -66,7 +85,14 @@ void sprawdz(const LZespolona &z1, Wyra_zespolone &pytanie_testowe, statystyka &
     }
 }
 
-void test_arytmetyki(std::istream &file, statystyka &stat)
+/*
+*   Funckja realizuja test liczb zespolonych
+*Argementy:
+*   file - wczytany plik z pytaniami
+*   stat - statystyka 
+*Funkcja wczytuje pytania z pliku i sprawdza czy zgadza sie z ustalonymi parametrami 
+*/
+void test_arytmetyki( std::istream &file, statystyka &stat)
 {
     while(true)
     {
@@ -87,7 +113,8 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
             if(std::cin.fail())
             {   
                 int i(0);
-                for(; i < 2; i++)
+                std::cout << "Niepoprawny format liczby zespolonej. Masz 3 proby." << std::endl;
+                for(; i < 3; i++)
                 {
                     std::cin.clear();
                     std::cin.ignore(1024, '\n');
@@ -99,12 +126,12 @@ void test_arytmetyki(std::istream &file, statystyka &stat)
                     }
                 }
 
-                if(i == 2)
+                if(i == 3)
                 {
                     std::cin.clear();
                     std::cin.ignore(1024, '\n');
                     stat.licz_pytania();
-                    std::cout << std::endl;
+                    std::cout << "Odpowiedz zostala uznana za bledna" << std::endl << std::endl;
                 }
             }else
             {

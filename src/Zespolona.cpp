@@ -15,6 +15,9 @@ LZespolona::LZespolona(double re, double im)
     this->re = re;
     this->im = im;
 }
+/*
+* Funckje przy pomocy ktorych ustawiamy wartosc czesci rzeczywistej oraz urojonej liczby zespolonej
+*/
 
 void LZespolona::set_re (double re)
 {
@@ -26,6 +29,10 @@ void LZespolona::set_im (double im)
     this->im = im;
 }
 
+/*
+* Funckje zwracajace wartosci przyjmowane przez Liczbe zespolona
+*/
+
 double LZespolona::get_re() const
 {
     return this->re;
@@ -34,6 +41,10 @@ double LZespolona::get_im() const
 {
     return this->im;
 }
+
+/*
+*   Funkcja realizuje wyswietlenie liczbe zespolonej
+*/
 
 std::ostream &operator << (std::ostream &wyjscie, const  LZespolona &Sk1)
  {  
@@ -64,6 +75,10 @@ std::ostream &operator << (std::ostream &wyjscie, const  LZespolona &Sk1)
     
  }
 
+/*
+*   Funckja realizuje wczytanie liczby zespolonej
+*   Pozwala na wczytanie liczby zeposlonej w skroconym formacie np. (2i)
+*/
 std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
 {
     char znak, znak1;
@@ -121,6 +136,9 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
     wejscie.setstate(std::ios::failbit);
     return wejscie;
 }
+/*
+* Funkcja realizuje dodawanie do siebie 2 liczb zespolonych 
+*/
 
  LZespolona LZespolona::operator + (const LZespolona &Sk1) const
  {
@@ -129,6 +147,9 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      wynik.im = this->im + Sk1.im;
      return wynik;
  }
+/*
+* Funkcja realizuje odejmowanie od siebie 2 liczb zespolonych 
+*/
 
  LZespolona LZespolona::operator - (const LZespolona &Sk1) const
  {
@@ -137,7 +158,10 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      wynik.im = this->im - Sk1.im;
      return wynik;
  }
-
+/*
+*   Funckja realizuje mnozenie przez siebie 2 liczb zepolonych
+*   Przyjmuje jako argumenty 2 liczby zespolone
+*/
   LZespolona LZespolona::operator * (const LZespolona &Sk1) const
  {
      LZespolona wynik;
@@ -146,12 +170,28 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      return wynik;
  }
 
+/*
+*   Funckja realizuje dzielenie liczby zespolonej 
+*   przyjmuje jako argumenty 2 rozne liczby zespolone 
+*   
+*   Funkcja wykorzystuje wzor na dzielenie liczby zespolonej
+*   Pierwsza liczba jest najpierw pomnozona przez sprzeznie drugiej liczby
+*     a nastepnie podzielona przez modul 2 liczby zespolonej
+*/
  LZespolona LZespolona::operator / (LZespolona Sk2) const
  {
     LZespolona wynik;
     wynik = (*this * Sk2.sprzezenie()) / (Sk2.modul() * Sk2.modul());
     return wynik;
  }
+
+/*
+*   Funckja, ktora dzieli liczbe zespolona przez liczbe typu double
+*Argumenty:
+*   Liczba zespolona
+*   liczba typu double
+* Zwraca wynik dzielenia skaldnikow przekazanych jako argumenty
+*/
 
  LZespolona LZespolona::operator / (const double &liczba ) const
  {
@@ -168,7 +208,12 @@ std::istream &operator >> (std::istream &wejscie, LZespolona &Sk1)
      }
     return wynik;
  }
-
+/*
+*   Funkcje, sprawdzajace czy 2 liczby zespolone sa sobie rowne lub nie
+*   Zwaracaja:
+    false albo true
+*
+*/
  bool LZespolona::operator == (const LZespolona &Sk1) const
  {
     if(fabs(this->re - Sk1.re) <= FLT_EPSILON)       /* FLT_EPSILON 1E-5*/
@@ -187,10 +232,19 @@ bool LZespolona::operator != (const LZespolona &Sk1) const
     return false;
 }
 
+/*
+*   Funkcja, ktora liczy modul liczby zespolonej
+*   oraz zrawaca pierwiastek z sum kwadrotow czesci rzeczywistej i urojeonej liczby zespolonej
+*/
  double LZespolona::modul()
  {
      return sqrt(this->re * this->re + this->im * this->im);
  }
+
+/*
+*   Funckja, wykonujaca sprzezenie liczby zespolonej, ktora zwraca
+*   liczbe zespolona ze zmianionym znakiem przy czesci urojonej
+*/
 
  LZespolona LZespolona::sprzezenie()
  {

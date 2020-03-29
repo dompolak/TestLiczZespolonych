@@ -3,7 +3,16 @@
 
 #include "Zespolona.hh"
 
+/*!
+ * Modeluje zbior operatorow arytmetycznych.
+ */
+
 enum Operator { Op_Dodaj, Op_Odejmij, Op_Mnoz, Op_Dziel };
+
+/*
+*   Klasa ktora modeluje pojecie dwuargumentowego wyrazenia zespolonego   
+*
+*/
 
 class Wyra_zespolone
 {
